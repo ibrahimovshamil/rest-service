@@ -1,5 +1,7 @@
-package com.example.restservice;
+package com.example.restservice.entities;
 
+
+import com.example.restservice.repos.Account;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,19 +18,14 @@ public class AgriUser {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "agriuser_id")
     public List<Account> accounts = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Product> products = new ArrayList<>();
     public int loan;
     public int transactionCreadit;
     public int transcactionDebit;
 
     public AgriUser(){};
-
-    public AgriUser(String type, List accounts, int loan, int transactionCreadit, int transcactionDebit) {
-        this.type = type;
-        this.accounts = accounts;
-        this.loan = loan;
-        this.transactionCreadit = transactionCreadit;
-        this.transcactionDebit = transcactionDebit;
-    }
 
     public int getId() {
         return id;
@@ -77,6 +74,14 @@ public class AgriUser {
 
     public void setTranscactionDebit(int transcactionDebit) {
         this.transcactionDebit = transcactionDebit;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
